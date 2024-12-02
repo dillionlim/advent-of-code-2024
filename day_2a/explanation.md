@@ -46,10 +46,30 @@ Count the number of *safe* queries.
 
 ## Solution
 
-If the row only has 1 number, it is safe by default.
+### Input Bounds
 
-Otherwise, establish whether it is increasing or decreasing by examining the first 2 numbers of the query. 
+From preliminary data analysis, we know that the numbers are all unsigned 32-bit integers.
 
-Based on the direction of the numbers, examine the other numbers to determine if they fall within the acceptable range.
+We also know that each row must have at least 2 integers, but we will not use that fact here (we will still handle it).
+
+### Actual Solution
+
+* If the row only has 1 number, it is safe trivially.
+* Otherwise, we will establish whether the row is increasing or decreasing by examining the first 2 numbers of the row. 
+* Based on the established direction, we will then examine the rest of the numbers to determine if they fall within the acceptable range (1 to 3).
+* This can be implemented quite easily in Rust with a sliding window (`array.window(2)`).
+
+### Code Complexity
+
+**Time Complexity:** $O(N \times M)$
+
+* N is the number of reports
+* M is the number of levels
+
+Trivially, each number is looked at only once.
+
+**Additional Space Complexity:** $O(1)$
+
+A constant amount of extra space is used.
 
 **Final answer:** 321.

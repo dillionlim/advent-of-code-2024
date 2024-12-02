@@ -40,6 +40,24 @@ You are given an input of $n$ rows. Each row has 2 numbers, $a$ and $b$. For eac
 
 ## Solution
 
-Simply parse the input, and sort the columns. Find the total sum of the numbers.
+### Input Bounds
+
+Based on preliminary data analysis, all the input can be fit into an unsigned 32-bit integer. In fact, all numbers seem to be unsigned 5-digit numbers.
+
+### Actual Solution
+
+Simply parse the input, and sort the columns. Then, iterate through each row and find the total sum of the absolute difference of the numbers in the same row.
+
+### Code Complexity
+
+**Time Complexity:** $O(N \log N)$
+
+* $N$ is the number of rows.
+
+Each column needs to be sorted.
+
+**Additional Space Complexity:** $O(N)$
+
+Each column is copied out to a temporary vector before being sorted. 
 
 **Final answer:** 1666427.

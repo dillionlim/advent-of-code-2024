@@ -41,6 +41,20 @@ where $\texttt{cnt(\(x\))}$ is the number of times $x$ appears in $B$.
 
 ## Solution
 
-Use a hashmap on $B$, and iterate through $A$ and calculate the above formula accordingly.
+### Actual Solution
+
+Use a hashmap on $B$ to get the counts of each number. Then, iterate through $A$ and calculate the total sum based on the above formula accordingly.
+
+### Code Complexity
+
+**Time Complexity:** $O(N)$
+
+* $N$ is the number of rows.
+
+Hashmaps have an average $O(1)$ insertion and read. Each number is iterated once.
+
+**Additional Space Complexity:** $O(N)$
+
+At worst, the hashmap can take up to $O(N)$ space to store all the values in $B$.
 
 **Final answer:** 24316233.

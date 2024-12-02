@@ -29,6 +29,16 @@ cat > explanation.md <<EOL
 
 ## Solution
 
+### Input Bounds
+
+### Actual Solution
+
+### Code Complexity
+
+**Time Complexity:** $O(N)$
+
+**Additional Space Complexity:** $O(N)$
+
 **Final answer:** .
 EOL
 

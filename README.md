@@ -13,6 +13,10 @@ will work. Then, check that it is installed with
 cc --version
 ```
 
+## Template
+
+The blank template for future Advent of Code setups can be found in the [https://github.com/dillionlim/advent-of-code-2024/tree/template](template branch).
+
 ## Running the directory setup
 
 Enable the script to be run by running:
@@ -29,21 +33,21 @@ In general, I like to use the convention $x$a for the first star problem, and $x
 
 ## Performing Testing
 
-To run tests on the test cases that you have input in /day_n/tests/test_cases.toml, simply run
+To run tests on the test cases that you have input in /day_n/test_cases.toml, simply run
 ```
 cargo test
 ```
 
 If all tests have succeeded, you should see something like
 ```
-test toml_test_cases ... ok
+test run_all_toml_test_cases ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.96s
 ```
 
 If certain tests have failed, you should see something like
 ```
----- toml_test_cases stdout ----
+---- run_all_toml_test_cases stdout ----
 Test case 1 failed in src/day_2/day_2b/test_cases.toml
  input: "7 6 4 2 1
 1 2 7 8 9

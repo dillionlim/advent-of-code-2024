@@ -53,7 +53,7 @@ cat <<EOL > "$day_folder/explanation.md"
 
 ### Abridged Problem Statement
 
-### Actual Solution
+### Solution
 
 ### Code Complexity
 

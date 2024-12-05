@@ -1,0 +1,7 @@
+[[test_cases]]
+input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+output = "48"
+
+[[test_cases]]
+input = "do()don't()do()don't()mul(1,2)"
+output = "0"

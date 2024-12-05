@@ -44,7 +44,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 If certain tests have failed, you should see something like
 ```
 ---- toml_test_cases stdout ----
-Test case 1 failed
+Test case 1 failed in src/day_2/day_2b/test_cases.toml
  input: "7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1

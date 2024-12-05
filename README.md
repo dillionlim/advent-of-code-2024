@@ -63,6 +63,7 @@ cargo run
 ```
 
 This will give you the results in the form of a table.
+
 ![Output Table](table.png)
 
 This shows the solution to the part, the time it took to run, and whether it passed all sample testcases (given by the emojis).

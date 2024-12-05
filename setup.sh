@@ -43,9 +43,9 @@ cat <<EOL > "$day_folder/explanation.md"
 
 ### Code Complexity
 
-**Time Complexity:** $O(N)
+**Time Complexity:** \$O(N)\$
 
-**Additional Space Complexity:** $O(N)
+**Additional Space Complexity:** \$O(N)\$
 
 **Final answer:**
 
@@ -57,9 +57,9 @@ cat <<EOL > "$day_folder/explanation.md"
 
 ### Code Complexity
 
-**Time Complexity:** $O(N)
+**Time Complexity:** \$O(N)\$
 
-**Additional Space Complexity:** $O(N)
+**Additional Space Complexity:** \$O(N)\$
 
 **Final answer:**
 EOL

@@ -163,7 +163,7 @@ else
     # If the function doesn't exist, create it
     cat <<EOF >> "$import_rs"
 
-pub fn ${hashmap_fn_name}() -> std::collections::HashMap<String, fn()> {
+pub fn ${hashmap_fn_name}() -> std::collections::HashMap<String, fn() -> String> {
     let mut map = std::collections::HashMap::new();
     map.insert("${day_number}a".to_string(), day_${day_number}a::solve as fn() -> String);
     map.insert("${day_number}b".to_string(), day_${day_number}b::solve as fn() -> String);

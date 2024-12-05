@@ -22,10 +22,10 @@ chmod +x setup.sh
 
 Then, create a new directory for the problems in day $x$ by doing 
 ```
-./setup.sh -n <x>
+./setup.sh -n <x> <Problem_Name>
 ```
 
-In general, I like to use the convention $x$ a for the first star problem, and $x$ b for the second star problem. So, the two problems on day 1 would be set up with $1a$ and $1b$.
+In general, I like to use the convention $x$a for the first star problem, and $x$b for the second star problem. So, the two problems on day 1 would be set up with $1a$ and $1b$.
 
 ## Performing Testing
 
@@ -61,3 +61,18 @@ To run it on the given input for the day itself, simply put the input into input
 ```
 cargo run
 ```
+
+This will give you the results in the form of a table.
+```
+╔═══════════════════════════════════════════════════════════════╗
+║                   🦀 Advent of Code 2024 🦀                  ║
+╠════════════╦═══════════╦═══════╦════╦════════════╦═══════╦════╣
+║    Day     ║  Part 1   ║ Time  ║Test║   Part 2   ║ Time  ║Test║
+╠════════════╬═══════════╬═══════╬════╬════════════╬═══════╬════╣
+║ 1: testing ║ testinput ║ 17 ms ║ ✅ ║ testinput2 ║ 17 ms ║ ✅ ║
+╚════════════╩═══════════╩═══════╩════╩════════════╩═══════╩════╝
+```
+
+## Disclaimers
+
+By default, input.txt is added to .gitignore as per request by the Advent of Code website, "If you're posting a code repository somewhere, please don't include parts of Advent of Code like the puzzle text or your inputs." As a result, I will only be posting abridged problem statements.

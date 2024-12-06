@@ -1,0 +1,54 @@
+[[test_cases]]
+input = """
+M.S
+.A.
+M.S
+"""
+output = "1"
+
+[[test_cases]]
+input = """
+M.M
+.A.
+S.S
+"""
+output = "1"
+
+[[test_cases]]
+input = """
+S.M
+.A.
+S.M
+"""
+output = "1"
+
+[[test_cases]]
+input = """
+S.S
+.A.
+M.M
+"""
+output = "1"
+
+[[test_cases]]
+input = """
+.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+..........
+"""
+output = "9"
+
+[[test_cases]]
+input = """
+...
+.A.
+...
+"""
+output = "0"

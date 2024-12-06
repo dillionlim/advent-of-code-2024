@@ -25,9 +25,19 @@ where
     input
         .into_iter()
         .map(|line| {
-            line.split_whitespace()
-                .filter_map(|word| word.parse::<T>().ok())
-                .collect::<Vec<T>>()
+            if _type == "char" {
+                line.chars()
+                    .filter_map(|c| {
+                        let parsed = c.to_string().parse::<T>();
+                        parsed.ok()
+                    })
+                    .collect::<Vec<T>>()
+            }
+            else {
+                line.split_whitespace()
+                    .filter_map(|word| word.parse::<T>().ok())
+                    .collect::<Vec<T>>()
+            }
         })
         .collect()
 }

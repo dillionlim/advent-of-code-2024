@@ -1,0 +1,24 @@
+[[test_cases]]
+input = """
+MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX
+"""
+output = "18"
+
+[[test_cases]]
+input = """
+MMXMMM
+MSAMXM
+MAMMAM
+XMASMS
+MXMMMM
+"""
+output = "4"

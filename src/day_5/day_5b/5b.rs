@@ -48,7 +48,6 @@ pub fn solve() -> String {
                     false => Ordering::Greater,
                 }
             }); 
-            println!("{:?}", sortable_update);
             tot_middle += sortable_update[(sortable_update.len()) / 2];
         }
     }

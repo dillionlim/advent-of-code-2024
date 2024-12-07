@@ -43,6 +43,8 @@ First, we observe that placing obstacles on any cell that is not on the original
 
 So, we only need to test whether placing obstacles on a given cell on the original guard's path will lead to a loop. For this, we can use a hash set to maintain the set of `(x, y, direction)` at every turn, and there exists a loop if we encounter the same set of `(x, y, direction)` again.
 
+As an improvement, one can hash the coordinates into a single integer, and use a bitmask to represent the direction of the current represented. That is, the value of the `direction_index`-th bit will represent whether that direction has been visited. We can then reuse the vector that is functioning as our hash set to avoid reconstruction costs.
+
 ### Code Complexity
 
 **Time Complexity:** $O(M^2 \times N^2)$

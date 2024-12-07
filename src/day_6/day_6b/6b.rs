@@ -1,7 +1,6 @@
 // Implementation for Day 6, Part B
 use crate::common::{get_input, process_input};
 use std::path::Path;
-use std::collections::HashSet;
 
 const DIRS: &[(isize, isize)] = &[(-1, 0), (0, 1), (1, 0), (0, -1)];
 
@@ -9,8 +8,13 @@ fn in_bounds(x: isize, y: isize, x_len: usize, y_len: usize) -> bool {
     x >= 0 && x < x_len as isize && y >= 0 && y < y_len as isize
 }
 
-fn is_loop(grid: &Vec<Vec<char>>, startx: isize, starty: isize) -> bool {
-    let mut seen: HashSet<(isize, isize, usize)> = HashSet::new();
+fn hash_coords(x: isize, y: isize, width: usize) -> usize {
+    (x * width as isize + y) as usize
+}
+
+fn is_loop(grid: &Vec<Vec<char>>, startx: isize, starty: isize, seen: &mut Vec<u8>) -> bool {
+    seen.fill(0);
+
     let mut direction_ind = 0;
     let mut x = startx;
     let mut y = starty;
@@ -25,10 +29,14 @@ fn is_loop(grid: &Vec<Vec<char>>, startx: isize, starty: isize) -> bool {
 
         if grid[newx as usize][newy as usize] == '#' {
             direction_ind = (direction_ind + 1) % DIRS.len();
-            if seen.contains(&(newx, newy, direction_ind)) {
+
+            let masked_dir = 1u8 << direction_ind;
+
+            if seen[hash_coords(x, y, grid[0].len())] & masked_dir > 0 {
                 return true;
             }
-            seen.insert((newx, newy, direction_ind));
+
+            seen[hash_coords(x, y, grid[0].len())] |= masked_dir;
         } 
         else {
             x = newx;
@@ -62,7 +70,8 @@ pub fn solve() -> String {
     let mut x = startx;
     let mut y = starty;
 
-    let mut vis: HashSet<(isize, isize)> = HashSet::new();
+    let mut vis: Vec<bool> = vec![false; grid.len() * grid[0].len()];
+    let mut seen: Vec<u8> = vec![0; grid.len() * grid[0].len()];
 
     while in_bounds(x, y, grid.len(), grid[0].len()) {
         let newx = x + DIRS[direction_ind].0;
@@ -77,9 +86,9 @@ pub fn solve() -> String {
         } 
         else {
             grid[newx as usize][newy as usize] = '#';
-            if !vis.contains(&(newx, newy)) && is_loop(&grid, startx, starty) {
+            if !vis[hash_coords(newx, newy, grid[0].len())] && is_loop(&grid, startx, starty, &mut seen) {
                 count += 1;
-                vis.insert((newx, newy));
+                vis[hash_coords(newx, newy, grid[0].len())] = true;
             }
             grid[newx as usize][newy as usize] = '.';
             x = newx;

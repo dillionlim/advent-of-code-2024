@@ -27,7 +27,8 @@ fn process_input(input: Vec<String>) -> Vec<(u64, Vec<u64>)> {
         .collect()
 }
 
-fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
+/*
+fn is_line_possible_old(target: u64, numbers: Vec<u64>) -> bool {
     let mut queue: VecDeque<u64> = VecDeque::from([numbers[0]]);
 
     for number in numbers.iter().skip(1) {
@@ -44,6 +45,26 @@ fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
     }
 
     queue.contains(&target)
+}
+*/
+
+fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
+    let mut queue: VecDeque<u64> = VecDeque::from([target]);
+
+    for number in numbers.iter().skip(1).rev() {
+        let no_of_elements = queue.len();
+        for _ in 0..no_of_elements {
+            let prev = queue.pop_front().expect("Failed to pop front from queue");
+            if prev > *number {
+                queue.push_back(prev - number);
+            }
+            if prev % number == 0 {
+                queue.push_back(prev / number);
+            }
+        }
+    }
+
+    queue.contains(&numbers[0])
 }
 
 pub fn solve() -> String {

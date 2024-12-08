@@ -31,6 +31,7 @@ fn count_digits (n: u64) -> u32 {
     n.checked_ilog10().unwrap_or(0) + 1
 }
 
+/*
 fn concat(a: u64, b: u64, target: u64) -> Option<u64> {
     if count_digits(a) + count_digits(b) > count_digits(target) {
         return None;
@@ -44,7 +45,7 @@ fn concat(a: u64, b: u64, target: u64) -> Option<u64> {
     None
 }
 
-fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
+fn is_line_possible_old(target: u64, numbers: Vec<u64>) -> bool {
     let mut queue: VecDeque<u64> = VecDeque::from([numbers[0]]);
 
     for number in numbers.iter().skip(1) {
@@ -64,6 +65,37 @@ fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
     }
 
     queue.contains(&target)
+}
+*/
+
+fn concatable(prev: u64, curr: u64) -> Option<u64> {
+    let mask = 10u64.pow(count_digits(curr));
+    if curr == prev % mask {
+        return Some((prev - curr) / mask);
+    }
+    None
+}
+
+fn is_line_possible(target: u64, numbers: Vec<u64>) -> bool {
+    let mut queue: VecDeque<u64> = VecDeque::from([target]);
+
+    for number in numbers.iter().skip(1).rev() {
+        let no_of_elements = queue.len();
+        for _ in 0..no_of_elements {
+            let prev = queue.pop_front().expect("Failed to pop front from queue");
+            if prev > *number {
+                queue.push_back(prev - number);
+            }
+            if prev % number == 0 {
+                queue.push_back(prev / number);
+            }
+            if let Some(remaining_number) = concatable(prev, *number) {
+                queue.push_back(remaining_number);
+            }
+        }
+    }
+
+    queue.contains(&numbers[0])
 }
 
 pub fn solve() -> String {

@@ -15,7 +15,7 @@ cc --version
 
 ## Template
 
-The blank template for future Advent of Code setups can be found in the [https://github.com/dillionlim/advent-of-code-2024/tree/template](template branch).
+The blank template for future Advent of Code setups can be found in the [template branch](https://github.com/dillionlim/advent-of-code-2024/tree/template).
 
 ## Running the directory setup
 

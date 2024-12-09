@@ -1,0 +1,15 @@
+[[test_cases]]
+input = "2333133121414131402"
+output = "2858"
+
+[[test_cases]]
+input = "12345"
+output = "132"
+
+[[test_cases]]
+input = "130303509"
+output = "150"
+
+[[test_cases]]
+input = "19509"
+output = "150"

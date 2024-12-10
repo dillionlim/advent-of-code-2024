@@ -60,12 +60,14 @@ fn print_table(days: Vec<String>) {
 
     // Collecting the results for each day
     for day in days {
+        let day_number = day.parse::<usize>().unwrap();
         let problem_name = extract_problem_name(&day);
         let (part1_result, part1_time) = run_cargo_run(&day, "a", &commands);
         let (part2_result, part2_time) = run_cargo_run(&day, "b", &commands);
         let tests_passed = run_cargo_test(&day);
 
         results.push((
+            day_number,
             problem_name,
             part1_result,
             part1_time,
@@ -75,12 +77,14 @@ fn print_table(days: Vec<String>) {
         ));
     }
 
+    results.sort_by(|a, b| a.0.cmp(&b.0));
+
     // Calculate maximum lengths for columns
-    let max_name_len = results.iter().map(|r| r.0.len()).max().unwrap_or(3).max(3);
-    let max_part1_len = results.iter().map(|r| r.1.len() ).max().unwrap_or(6).max(6);
-    let max_part1_time_len = results.iter().map(|r| format_duration(r.2).len()).max().unwrap_or(4).max(4);
-    let max_part2_len = results.iter().map(|r| r.4.len() ).max().unwrap_or(6).max(6);
-    let max_part2_time_len = results.iter().map(|r| format_duration(r.5).len()).max().unwrap_or(4).max(4);
+    let max_name_len = results.iter().map(|r| r.1.len()).max().unwrap_or(3).max(3);
+    let max_part1_len = results.iter().map(|r| r.2.len() ).max().unwrap_or(6).max(6);
+    let max_part1_time_len = results.iter().map(|r| format_duration(r.3).len()).max().unwrap_or(4).max(4);
+    let max_part2_len = results.iter().map(|r| r.5.len() ).max().unwrap_or(6).max(6);
+    let max_part2_time_len = results.iter().map(|r| format_duration(r.6).len()).max().unwrap_or(4).max(4);
 
     // Calculate the total width for the table header
     let name_width = max_name_len + 2;
@@ -116,7 +120,7 @@ fn print_table(days: Vec<String>) {
 
     // Print the table rows for each day
     for result in results {
-        let (name, part1, part1_time, test1, part2, part2_time) = result;
+        let (_, name, part1, part1_time, test1, part2, part2_time) = result;
         println!(
             "║{:^name_width$}║{:^part1_width$}║{:^part1_time_width$}║{:^3}║{:^part2_width$}║{:^part2_time_width$}║{:^3}║",
             name,

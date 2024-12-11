@@ -75,7 +75,7 @@ We use the same observation as in Part A. The bolded statements are the new stat
 That is, suppose that there exists a chain of numbers $t_0, t_1, t_2, \cdots$ such that $t_{i+1}$ can be formed from $t_i$ by some operation (addition, multiplication or concatenation), and $t_0$ is our target number. Then, 
 * $t_{i+1}$ can only be formed from a multiplication if $t_i | t_{i+1}$.
 * $t_{i+1}$ can only be formed from an addition if $t_i > t_{i+1}$, since negative numbers and zero do not exist in our input.
-* **$\mathbf{t_{i+1}}$ can only be formed from a concatenation if $\mathbf{t_{i+1}}$ starts with $\mathbf{t_i}$.**
+* **$\boldsymbol{t_{i+1}}$ can only be formed from a concatenation if $\boldsymbol{t_{i+1}}$ starts with $\boldsymbol{t_i}$.**
 
 We can use this observation to prune a lot of unnecessary branches in our code.
 

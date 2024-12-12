@@ -1,0 +1,55 @@
+[[test_cases]]
+input = """
+AAAA
+BBCD
+BBCC
+EEEC
+"""
+output = "80"
+
+[[test_cases]]
+input = """
+OOOOO
+OXOXO
+OOOOO
+OXOXO
+OOOOO
+"""
+output = "436"
+
+[[test_cases]]
+input = """
+EEEEE
+EXXXX
+EEEEE
+EXXXX
+EEEEE
+"""
+output = "236"
+
+[[test_cases]]
+input = """
+AAAAAA
+AAABBA
+AAABBA
+ABBAAA
+ABBAAA
+AAAAAA
+"""
+output = "368"
+
+[[test_cases]]
+input = """
+RRRRIICCFF
+RRRRIICCCF
+VVRRRCCFFF
+VVRCCCJFFF
+VVVVCJJCFE
+VVIVCCJJEE
+VVIIICJJEE
+MIIIIIJJEE
+MIIISIJEEE
+MMMISSJEEE
+"""
+output = "1206"
+

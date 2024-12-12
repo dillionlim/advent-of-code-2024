@@ -1,0 +1,33 @@
+[[test_cases]]
+input = """
+AAAA
+BBCD
+BBCC
+EEEC
+"""
+output = "140"
+
+[[test_cases]]
+input = """
+OOOOO
+OXOXO
+OOOOO
+OXOXO
+OOOOO
+"""
+output = "772"
+
+[[test_cases]]
+input = """
+RRRRIICCFF
+RRRRIICCCF
+VVRRRCCFFF
+VVRCCCJFFF
+VVVVCJJCFE
+VVIVCCJJEE
+VVIIICJJEE
+MIIIIIJJEE
+MIIISIJEEE
+MMMISSJEEE
+"""
+output = "1930"

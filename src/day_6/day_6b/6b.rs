@@ -1,6 +1,7 @@
 // Implementation for Day 6, Part B
 use crate::common::{get_input, process_input};
 use std::path::Path;
+use std::cmp::{max, min};
 
 const DIRS: &[(isize, isize)] = &[(-1, 0), (0, 1), (1, 0), (0, -1)];
 
@@ -8,40 +9,128 @@ fn in_bounds(x: isize, y: isize, x_len: usize, y_len: usize) -> bool {
     x >= 0 && x < x_len as isize && y >= 0 && y < y_len as isize
 }
 
-fn hash_coords(x: isize, y: isize, width: usize) -> usize {
-    (x * width as isize + y) as usize
+fn create_jump_map(grid: &Vec<Vec<char>>) -> Vec<Vec<[isize; 4]>> {
+    let mut jump_map: Vec<Vec<[isize; 4]>> = vec![vec![[0; 4]; grid[0].len()]; grid.len()];
+
+    // jump map for the up direction
+    for (col_idx, _) in grid[0].iter().enumerate() {
+        let mut jump_map_ind = -1 as isize;
+        for (row_idx, row) in grid.iter().enumerate() {
+            if row[col_idx] == '#' {
+                jump_map_ind = row_idx as isize + 1;
+            } 
+            else {
+                jump_map[row_idx][col_idx][0] = jump_map_ind;
+            }
+        }
+    }
+
+    // jump map for the right direction
+    for (row_idx, row) in grid.iter().enumerate() {
+        let mut jump_map_ind = row.len() as isize;
+        for (col_idx, &char) in row.iter().enumerate().rev() {
+            if char == '#' {
+                if col_idx > 0 {
+                    jump_map_ind = col_idx as isize - 1;
+                }
+            }
+            else {
+                jump_map[row_idx][col_idx][1] = jump_map_ind;
+            }
+        }
+    }
+
+    // jump map for the down direction
+    for (col_idx, _) in grid[0].iter().enumerate() {
+        let mut jump_map_ind = grid[0].len() as isize;
+        for (row_idx, row) in grid.iter().enumerate().rev() {
+            if row[col_idx] == '#' {
+                if row_idx > 0 {
+                    jump_map_ind = row_idx as isize - 1;
+                }
+            } 
+            else {
+                jump_map[row_idx][col_idx][2] = jump_map_ind;
+            }
+        }
+    }
+
+    // jump map for the left direction
+    for (row_idx, row) in grid.iter().enumerate() {
+        let mut jump_map_ind = -1 as isize;
+        for (col_idx, &char) in row.iter().enumerate() {
+            if char == '#' {
+                jump_map_ind = col_idx as isize + 1;
+            }
+            else {
+                jump_map[row_idx][col_idx][3] = jump_map_ind;
+            }
+        }
+    }
+
+    jump_map
 }
 
-fn is_loop(grid: &Vec<Vec<char>>, startx: isize, starty: isize, seen: &mut Vec<u8>) -> bool {
-    seen.fill(0);
+fn get_jump(jump_map: &Vec<Vec<[isize; 4]>>, x: isize, y: isize, obs_x: isize, obs_y: isize, dir: usize) -> (isize, isize) {
+    match dir {
+        0 => {
+            if obs_y == y && x > obs_x {
+                (max(obs_x + 1, jump_map[x as usize][y as usize][0]), y)
+            }
+            else {
+                (jump_map[x as usize][y as usize][0], y)
+            }
+        },
+        1 => {
+            if obs_x == x && y < obs_y {
+                (x, min(obs_y - 1, jump_map[x as usize][y as usize][1]))
+            }
+            else {
+                (x, jump_map[x as usize][y as usize][1])
+            }
+        },
+        2 => {
+            if obs_y == y && x < obs_x {
+                (min(obs_x - 1, jump_map[x as usize][y as usize][2]), y)
+            }
+            else {
+                (jump_map[x as usize][y as usize][2], y)
+            }
+        },
+        3 => {
+            if obs_x == x && y > obs_y {
+                (x, max(obs_y + 1, jump_map[x as usize][y as usize][3]))
+            }
+            else {
+                (x, jump_map[x as usize][y as usize][3])
+            }
+        },
+        _ => panic!("Invalid direction"),
+    }
+}
 
-    let mut direction_ind = 0;
+fn is_loop(jump_map: &Vec<Vec<[isize; 4]>>, startx: isize, starty: isize, obs_x: isize, obs_y: isize) -> bool {
+    let mut vis = vec![0u8; jump_map.len() * jump_map[0].len()];
+
     let mut x = startx;
     let mut y = starty;
+    let mut dir = 0;
 
-    while in_bounds(x, y, grid.len(), grid[0].len()) {
-        let newx = x + DIRS[direction_ind].0;
-        let newy = y + DIRS[direction_ind].1;
+    loop {
+        (x, y) = get_jump(jump_map, x, y, obs_x, obs_y, dir);
 
-        if !in_bounds(newx, newy, grid.len(), grid[0].len()) {
-            return false;
+        if !in_bounds(x, y, jump_map.len(), jump_map[0].len()) {
+            break;
         }
 
-        if grid[newx as usize][newy as usize] == '#' {
-            direction_ind = (direction_ind + 1) % DIRS.len();
+        dir = (dir + 1) % DIRS.len();
 
-            let masked_dir = 1u8 << direction_ind;
-
-            if seen[hash_coords(x, y, grid[0].len())] & masked_dir > 0 {
-                return true;
-            }
-
-            seen[hash_coords(x, y, grid[0].len())] |= masked_dir;
-        } 
-        else {
-            x = newx;
-            y = newy;
+        let idx = x as usize * jump_map[0].len() + y as usize;
+        let masked_dir = 1u8 << dir;
+        if vis[idx] & masked_dir > 0 {
+            return true;
         }
+        vis[idx] |= masked_dir;
     }
     false
 }
@@ -50,7 +139,7 @@ pub fn solve() -> String {
     let source_file = file!();
     let dir_path = Path::new(&source_file).parent().unwrap().to_path_buf();
     let input = get_input(dir_path);
-    let mut grid: Vec<Vec<char>> = process_input(input, "char");
+    let grid: Vec<Vec<char>> = process_input(input, "char");
 
     let (startx, starty): (isize, isize) = grid.iter()
         .enumerate()
@@ -59,42 +148,35 @@ pub fn solve() -> String {
                 .enumerate()
                 .find_map(|(j, &v)| if v == '^' { Some((i as isize, j as isize)) } else { None })
         })
-        .unwrap_or((-1, -1));
+        .unwrap();
 
-    if startx == -1 || starty == -1 {
-        return "0".to_string();
-    }
+    let jump_map = create_jump_map(&grid);
 
-    let mut direction_ind: usize = 0;
-    let mut count: u32 = 0;
+    let mut vis = vec![false; grid.len() * grid[0].len()];
     let mut x = startx;
     let mut y = starty;
-
-    let mut vis: Vec<bool> = vec![false; grid.len() * grid[0].len()];
-    let mut seen: Vec<u8> = vec![0; grid.len() * grid[0].len()];
-
-    while in_bounds(x, y, grid.len(), grid[0].len()) {
-        let newx = x + DIRS[direction_ind].0;
-        let newy = y + DIRS[direction_ind].1;
-
-        if !in_bounds(newx, newy, grid.len(), grid[0].len()) {
+    let mut dir_ind = 0;
+    let mut ans = 0;
+    
+    loop {
+        let (dx, dy) = DIRS[dir_ind];
+        x += dx;
+        y += dy;
+        if !in_bounds(x, y, grid.len(), grid[0].len()) {
             break;
         }
-
-        if grid[newx as usize][newy as usize] == '#' {
-            direction_ind = (direction_ind + 1) % DIRS.len();
-        } 
-        else {
-            grid[newx as usize][newy as usize] = '#';
-            if !vis[hash_coords(newx, newy, grid[0].len())] && is_loop(&grid, startx, starty, &mut seen) {
-                count += 1;
-                vis[hash_coords(newx, newy, grid[0].len())] = true;
+        if grid[x as usize][y as usize] == '#' {
+            x -= dx;
+            y -= dy;
+            dir_ind = (dir_ind + 1) % DIRS.len();
+        }
+        else if (x != startx || y != starty) && !vis[x as usize * grid[0].len() + y as usize] {
+            vis[x as usize * grid[0].len() + y as usize] = true;
+            if is_loop(&jump_map, startx, starty, x, y) {
+                ans += 1;
             }
-            grid[newx as usize][newy as usize] = '.';
-            x = newx;
-            y = newy;
         }
     }
-
-    count.to_string()
+    
+    ans.to_string()
 }

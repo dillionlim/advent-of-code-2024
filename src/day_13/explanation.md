@@ -67,7 +67,7 @@ Now, suppose there exists real solutions, we now need to check for integer solut
 
 First, we convert the equations to satisfy Bézout's identity. 
 
-**Theorem 13.2. (Bézout's Identity)** *Let $a$ and $b$ be integers with greatest common divisor $d$. Then there exist integers $x$ and $y$ such that $ax + by = d$. Moreover, the integers of the form $az + bt$ are exactly the multiples of $d$.*
+**Theorem 13.2. (Bézout's Identity)** *Let $`a`$ and $`b`$ be integers with greatest common divisor $`d`$. Then there exist integers $`x`$ and $`y`$ such that $`ax + by = d`$. Moreover, the integers of the form $`az + bt`$ are exactly the multiples of $`d`$.*
 
 By Bézout's Identity, we know that there exists integers $a, b$ such that $\lambda x_1 + \mu x_2 = \gcd(x_1, x_2)$. Then, we can multiply the whole equation by $\frac{g_x}{\gcd(x_1, x_2)}$ to get:
 $$x_1 \left(\lambda \cdot \frac{g_x}{\gcd(x_1, x_2)}\right) + x_2 \left(\mu \cdot \frac{g_x}{\gcd(x_1, x_2)}\right) = g_x.$$
@@ -88,7 +88,7 @@ Then, we define $r_i = r_{i-2} - q_ir_{i-1}$, where $q_i$ is the quotient at ste
 
 We will show that this holds.
 
-**Lemma 13.1.** *If $a = bq+r$, where $q$ is the quotient and $r$ is the remainder after dividing $a$ by $b$, then $\gcd(a,b) = \gcd(b,r)$.*
+**Lemma 13.1.** *If $`a = bq+r`$, where $`q`$ is the quotient and $`r`$ is the remainder after dividing $`a`$ by $`b`$, then $`\gcd(a,b) = \gcd(b,r)`$.*
 
 *Proof.* If $a = bq+r$, where $q$ is the quotient and $r$ is the remainder after dividing $a$ by $b$, then we can write $r = a - bq$. 
 

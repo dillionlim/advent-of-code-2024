@@ -81,34 +81,7 @@ Therefore, counting the number of sides for this part simply boils down to count
 
 There are two kinds of corners, exterior corners (those that form a $270 \degree$ exterior angle) and interior corners (those that form a $90 \degree$ exterior angle).
 
-<div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <div style="text-align: center;">
-        <table style="border-collapse: collapse; margin: 0 auto;">
-            <tr>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: white;"></td>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: blue;"></td>
-            </tr>
-            <tr>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: black; color: white;"></td>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: white;"></td>
-            </tr>
-        </table>
-        <div>Exterior Corner</div>
-    </div>
-    <div style="text-align: center;">
-        <table style="border-collapse: collapse; margin: 0 auto;">
-            <tr>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: black; color: white;"></td>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: white;"></td>
-            </tr>
-            <tr>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: black; color: white;"></td>
-                <td style="width: 50px; height: 50px; text-align: center; vertical-align: middle; border: 1px solid black; background-color: black;"></td>
-            </tr>
-        </table>
-        <div>Interior Corner</div>
-    </div>
-</div>
+![corners](corners.png)
 
 Note that for the exterior corner, we simply need to check if the two orthogonal neighbours are both different from the current tile. Note that the blue tile does not matter, and it can be identical to the current tile.
 

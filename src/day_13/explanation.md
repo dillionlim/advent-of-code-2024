@@ -167,4 +167,5 @@ For the singular matrix case, checking if the prize can be reached is a constant
 All the testcases are stored in memory. Each testcase has 6 numbers.
 
 **Final answer (Part A):** 33427.
+
 **Final answer (Part B):** 91649162972270.

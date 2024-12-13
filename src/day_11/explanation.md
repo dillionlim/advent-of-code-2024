@@ -46,4 +46,5 @@ However, in practice, the number of unique numbers after $n$ iterations, for any
 Similarly, all the unique numbers need to be stored.
 
 **Final answer (Part A):** 175006.
+
 **Final answer (Part B):** 207961583799296.

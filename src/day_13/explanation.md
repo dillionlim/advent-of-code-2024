@@ -20,11 +20,11 @@ We first recognise that this can be written in a matrix equation of the form $A\
 
 That is, given the conventions above, we can write the matrix equation
 
-$$ \begin{bmatrix} x_1 & x_2 \\ y_1 & y_2 \end{bmatrix} \begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} g_x \\ g_y \end{bmatrix} $$
+$$\begin{bmatrix} x_1 & x_2 \\\ y_1 & y_2 \end{bmatrix} \begin{bmatrix} a \\\ b \end{bmatrix} = \begin{bmatrix} g_x \\\ g_y \end{bmatrix}$$
 
 #### Non-singular Case
 
-**Theorem 13.1.** *If $A$ is an invertible square matrix, then there exists a unique solution $\boldsymbol{x}$ such that $A\boldsymbol{x}=B$.*
+**Theorem 13.1.** *If $`A`$ is an invertible square matrix, then there exists a unique solution $`\boldsymbol{x}`$ such that $`A\boldsymbol{x}=B`$.*
 
 *Proof.* Let $A$ be an invertible $n \times n$ square matrix. Then, by definition, there exists a matrix $A^{-1}$ such that $A^{-1} A = I_n$. 
 
@@ -36,16 +36,17 @@ We can therefore obtain the solution for $\boldsymbol{x}$.
 
 $$ 
 \begin{aligned}
-\begin{bmatrix} a \\ b \end{bmatrix} &= \begin{bmatrix} x_1 & x_2 \\ y_1 & y_2 \end{bmatrix}^{-1} \begin{bmatrix} g_x \\ g_y \end{bmatrix}\\
-&= \frac{1}{x_1y_2 - x_2y_1} \begin{bmatrix} y_2 & -y_1 \\ -x_2 & x_1 \end{bmatrix} \begin{bmatrix} g_x \\ g_y \end{bmatrix}\\
-&= \frac{1}{x_1y_2 - x_2y_1} \begin{bmatrix} y_2g_x - y_1g_y \\ x_1g_y-x_2g_x \end{bmatrix}
+\begin{bmatrix} a \\\ b \end{bmatrix} &= \begin{bmatrix} x_1 & x_2 \\\ y_1 & y_2 \end{bmatrix}^{-1} \begin{bmatrix} g_x \\\ g_y \end{bmatrix}\\\
+&= \frac{1}{x_1y_2 - x_2y_1} \begin{bmatrix} y_2 & -y_1 \\\ -x_2 & x_1 \end{bmatrix} \begin{bmatrix} g_x \\\ g_y \end{bmatrix}\\\
+&= \frac{1}{x_1y_2 - x_2y_1} \begin{bmatrix} y_2g_x - y_1g_y \\\ x_1g_y-x_2g_x \end{bmatrix}
 \end{aligned}
 $$
 
 Therefore, we can conclude that:
+
 $$
 \begin{aligned}
-a &= \frac{y_2g_x - y_1g_y}{x_1y_2 - x_2y_1} \\ 
+a &= \frac{y_2g_x - y_1g_y}{x_1y_2 - x_2y_1} \\\ 
 b &= \frac{x_1g_y-x_2g_x}{x_1y_2 - x_2y_1}
 \end{aligned}
 $$
@@ -54,9 +55,9 @@ However, since we can only press the buttons an integer number of times, we must
 
 #### Singular Case
 
-However, there is an important edge case (which does not seem to appear in the inputs), where the matrix is singular. That is, the matrix $\begin{bmatrix} x_1 & x_2 \\ y_1 & y_2 \end{bmatrix}$ has a zero determinant. 
+However, there is an important edge case (which does not seem to appear in the inputs), where the matrix is singular. That is, the matrix $`\begin{bmatrix} x_1 & x_2 \\\ y_1 & y_2 \end{bmatrix}`$ has a zero determinant. 
 
-This means that the matrices $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ are linearly dependent and therefore any linear combination of them does not span the whole of $\mathbb{R}^2$.
+This means that the matrices $`\begin{bmatrix} x_1 \\\ y_1 \end{bmatrix}`$ and $`\begin{bmatrix} x_2 \\\ y_2 \end{bmatrix}`$ are linearly dependent and therefore any linear combination of them does not span the whole of $\mathbb{R}^2$.
 
 For such a matrix equation, there are either no solutions, or infinitely many solutions. 
 
@@ -95,8 +96,8 @@ Let $d$ be any common divisor of $a$ and $b$. Then, we can write $a = k_1 d, b= 
 
 $$
 \begin{aligned}
-r &= a - bq\\
-&= k_1 d - k_2 d q\\
+r &= a - bq\\\
+&= k_1 d - k_2 d q\\\
 &= (k_1 - k_2) d q
 \end{aligned}
 $$
@@ -128,7 +129,7 @@ Therefore, $b - b_0 = r \cdot \frac{x_1}{\gcd(x_1,x_2)}$ for some positive integ
 
 $$
 \begin{aligned}
-a &= a_0 - r \cdot \frac{x_2}{\gcd(x_1,x_2)}\\
+a &= a_0 - r \cdot \frac{x_2}{\gcd(x_1,x_2)}\\\
 b &= b_0 + r \cdot \frac{x_1}{\gcd(x_1,x_2)}
 \end{aligned}
 $$
@@ -137,7 +138,7 @@ Without loss of generality, we can replace $r$ with $-r$ to obtain the nicer equ
 
 $$
 \begin{aligned}
-a &= a_0 + r \cdot \frac{x_2}{\gcd(x_1,x_2)}\\
+a &= a_0 + r \cdot \frac{x_2}{\gcd(x_1,x_2)}\\\
 b &= b_0 - r \cdot \frac{x_1}{\gcd(x_1,x_2)}
 \end{aligned}
 $$

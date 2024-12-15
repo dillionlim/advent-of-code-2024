@@ -1,4 +1,4 @@
-#[allow(unused_variables)]
+#![allow(unused)]
 
 // Implementation for Day 14, Part B
 use crate::common::get_input;

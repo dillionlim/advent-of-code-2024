@@ -1,4 +1,4 @@
-// Implementation for Day 18, Part A
+// Implementation for Day 18, Part B
 use crate::common::get_input;
 use std::path::Path;
 

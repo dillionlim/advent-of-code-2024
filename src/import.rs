@@ -71,6 +71,10 @@ mod day_17b;
 mod day_18a;
 #[path = "day_18/day_18b/18b.rs"]
 mod day_18b;
+#[path = "day_19/day_19a/19a.rs"]
+mod day_19a;
+#[path = "day_19/day_19b/19b.rs"]
+mod day_19b;
 
 pub fn get_day_solvers() -> std::collections::HashMap<String, fn() -> String> {
     let mut map = std::collections::HashMap::new();
@@ -110,5 +114,7 @@ pub fn get_day_solvers() -> std::collections::HashMap<String, fn() -> String> {
     map.insert("17b".to_string(), day_17b::solve as fn() -> String);
     map.insert("18a".to_string(), day_18a::solve as fn() -> String);
     map.insert("18b".to_string(), day_18b::solve as fn() -> String);
+    map.insert("19a".to_string(), day_19a::solve as fn() -> String);
+    map.insert("19b".to_string(), day_19b::solve as fn() -> String);
     map
 }

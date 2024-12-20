@@ -1,0 +1,13 @@
+[[test_cases]]
+input = "5"
+output = "5"
+
+[[test_cases]]
+input = """
+multi
+line
+test
+"""
+output = """multi
+line
+test"""

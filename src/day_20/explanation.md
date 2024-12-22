@@ -54,6 +54,8 @@ We similarly note from part A that for a pair of starting skip square $(x_1, y_1
 
 Due to the high constant factor of checking all squares in a 20 manhattan distance radius, we can have an alternative solution. We simply check all pairs of starting skip square $(x_1, y_1)$ and the ending skip square $(x_2, y_2)$ on the path, and check if both conditions above are satisfied. This, in practice, gives a lower runtime than the solution in part A for large distances.
 
+We can optimize this further by noting that the first 100 squares from the current square will never yield a skip distance less than 100, so we can skip it. Furthermore, if a current pair of skip squares has a manhattan distance that is more than 20, we also note that the next skip distance - 20 squares will also never be valid. So, we can skip these set of squares. In practice, this gives about a 10 times constant time factor speedup.
+
 ### Code Complexity
 
 **Time Complexity:** $O(N \times M + P^2)$

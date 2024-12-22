@@ -1,7 +1,6 @@
 // Implementation for Day 20, Part B
 use crate::common::{get_input, process_input};
 use std::path::Path;
-use itertools::Itertools;
 
 const DIRS: &[(isize, isize)] = &[(0, 1), (1, 0), (0, -1), (-1, 0)];
 
@@ -26,12 +25,11 @@ pub fn solve() -> String {
     let mut path = Vec::new();
     let mut currx = start.0 as isize;
     let mut curry = start.1 as isize;
-    let mut ind = 0usize;
 
     vis[currx as usize * grid[0].len() + curry as usize] = true;
 
     loop {
-        path.push((ind, currx, curry));
+        path.push((currx, curry));
         if grid[currx as usize][curry as usize] == 'E' {
             break;
         }
@@ -47,15 +45,22 @@ pub fn solve() -> String {
                 break;
             }
         }
-        ind += 1;
     }
 
     let mut ans = 0;
 
-    for ((i1, x1, y1), (i2, x2, y2)) in path.iter().tuple_combinations() {
-        let d = x1.abs_diff(*x2) + y1.abs_diff(*y2);
-        if d <= 20 && i1.abs_diff(*i2) >= d + 100 {
-            ans += 1;
+    for (i, (x, y)) in path.iter().enumerate() {
+        let mut j = i + 100;
+        while j < path.len() {
+            let dist = (x - path[j].0).abs() + (y - path[j].1).abs();
+            if dist <= 20 && j.abs_diff(i) >= dist as usize + 100 {
+                ans += 1;
+            }
+            else if dist > 20 {
+                j += dist as usize - 20;
+                continue;
+            }
+            j += 1;
         }
     }
     

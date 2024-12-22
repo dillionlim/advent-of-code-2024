@@ -1,0 +1,8 @@
+[[test_cases]]
+input = """
+1
+2
+3
+2024
+"""
+output = "23"

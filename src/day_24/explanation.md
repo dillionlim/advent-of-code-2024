@@ -51,11 +51,15 @@ Find all swapped codes, and output them space separated, ordered in lexicographi
 By analysing the general dependency graph, we notice that the addition process is quite recursive. This hints at it being a ripple-carry adder.
 
 This means that the circuit will be of the form:
+
 ![rca](rca.png)
+
 *Image taken from [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/5/5d/4-bit_ripple_carry_adder.svg).*
 
 In particular, the full adder will be of the form:
+
 ![fa](full-adder.png)
+
 *Image taken from [Wikipedia](https://en.m.wikipedia.org/wiki/File:Full-adder.svg).*
 
 Therefore, we can establish a few rules to look for incorrect output values:

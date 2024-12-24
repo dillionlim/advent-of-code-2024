@@ -19,7 +19,7 @@ struct TestCase {
 
 #[derive(Deserialize)]
 struct TestCaseVec {
-    test_cases: Vec<TestCase>,
+    test_cases: Option<Vec<TestCase>>,
 }
 
 fn extract_part(path: &str) -> Option<String> {
@@ -55,28 +55,30 @@ fn run_all_toml_test_cases() -> Result<(), String> {
         let part = extract_part(path.to_str().expect("Unable to convert to string"))
             .expect("Unable to extract part from path");
 
-        for (i, case) in test_cases.test_cases.iter().enumerate() {
+        if let Some(test_cases) = test_cases.test_cases {
+            for (i, case) in test_cases.iter().enumerate() {
 
-            env::set_var("TEST_INPUT", &case.input);
+                env::set_var("TEST_INPUT", &case.input);
 
-            if let Some(solver) = &commands.get(&part) {
-                let result = solver();  
-                
-                let expected_output = case.output.trim();
-        
-                if result != expected_output {
-                    eprintln!(
-                        "Test case {} failed in {}\n input: \"{}\"\n expected: \"{}\"\n output: \"{}\"\n",
-                        i + 1, path.display(), case.input.trim(), expected_output, result
-                    );
+                if let Some(solver) = &commands.get(&part) {
+                    let result = solver();  
+                    
+                    let expected_output = case.output.trim();
+            
+                    if result != expected_output {
+                        eprintln!(
+                            "Test case {} failed in {}\n input: \"{}\"\n expected: \"{}\"\n output: \"{}\"\n",
+                            i + 1, path.display(), case.input.trim(), expected_output, result
+                        );
+                        dir_failed = true;
+                        all_failed = true;
+                    }
+                } else {
+                    eprintln!("No solver found for test case {} in {}", i + 1, path.display());
                     dir_failed = true;
                     all_failed = true;
-                }
-            } else {
-                eprintln!("No solver found for test case {} in {}", i + 1, path.display());
-                dir_failed = true;
-                all_failed = true;
-            }        
+                }        
+            }
         }
 
         if dir_failed {

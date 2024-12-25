@@ -16,7 +16,7 @@ pub fn solve() -> String {
             ans ^= ans << 6;
             ans &= 0xffffff;
             ans ^= ans >> 5;
-            ans &= 0xffffff;
+            // ans &= 0xffffff; // there is no need to modulo this
             ans ^= ans << 11;
             ans &= 0xffffff;
         }

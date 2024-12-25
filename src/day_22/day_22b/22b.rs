@@ -2,12 +2,12 @@
 use crate::common::get_input;
 use std::path::Path;
 
-fn next(number: u64) -> u64 {
+fn next(number: u32) -> u32 {
     let mut n = number;
     n ^= n << 6;
     n &= 0xffffff;
     n ^= n >> 5;
-    n &= 0xffffff;
+    // n &= 0xffffff; // no need to modulo this
     n ^= n << 11;
     n &= 0xffffff;
     n
@@ -17,9 +17,9 @@ pub fn solve() -> String {
     let source_file = file!();
     let dir_path = Path::new(&source_file).parent().unwrap().to_path_buf();
     let input = get_input(dir_path);
-    let secret_numbers = input.iter().map(|s| s.parse::<u64>().unwrap()).collect::<Vec<u64>>();
+    let secret_numbers = input.iter().map(|s| s.parse::<u32>().unwrap()).collect::<Vec<u32>>();
     
-    let mut sequences: Vec<u64> = vec![0; 130321]; // 19^4 = 130321 possible sequences
+    let mut sequences: Vec<u16> = vec![0; 130321]; // 19^4 = 130321 possible sequences
     let mut vis = vec![std::u8::MAX; 130321];
 
     for (i, &number) in secret_numbers.iter().enumerate() {
@@ -39,7 +39,7 @@ pub fn solve() -> String {
             hash = (hash * 19 + (curr_no % 10) as i64 - (last_no % 10) as i64 + OFFSET_BASE_19) % MODULO_BASE_19;
             if vis[hash as usize] != i as u8 {
                 vis[hash as usize] = i as u8;
-                sequences[hash as usize] += curr_no % 10;
+                sequences[hash as usize] += (curr_no % 10) as u16;
             }
             last_no = curr_no;
             curr_no = next(curr_no);

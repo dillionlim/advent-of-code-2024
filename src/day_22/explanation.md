@@ -26,6 +26,8 @@ Simulate the described process above. However, we realise that since all numbers
 * Dividing by $2^x$ can be done by `a >> x`.
 * Finding $a \bmod 2^x$ can be done by `a &` $(2^x -1)$.
 
+As a minor optimization, we node that when we divide the number, the number will never become larger, so we can skip the modulo operation for that step.
+
 ### Code Complexity
 
 **Time Complexity:** $O(N \times M)$
